@@ -105,7 +105,6 @@ particlesJS('particles-js', {
     "retina_detect": true
 });
 
-// Terminal functionality
 document.addEventListener('DOMContentLoaded', () => {
     const terminalModal = document.getElementById('terminal-modal');
     const openTerminalBtn = document.getElementById('open-terminal');
@@ -115,6 +114,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullscreenBtn = document.getElementById('fullscreen-btn');
     const terminalContent = document.getElementById('terminal-content');
     const commandInput = document.getElementById('command-input');
+
+    // Add a text-based close button for mobile
+    const mobileCloseBtn = document.createElement('div');
+    mobileCloseBtn.className = 'mobile-close-btn';
+    mobileCloseBtn.textContent = 'Close';
+    terminalWindow.querySelector('.window-frame').appendChild(mobileCloseBtn);
 
     let isFullscreen = false;
     let isMinimized = false;
@@ -171,6 +176,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeTerminalBtn.addEventListener('click', closeTerminal);
     closeTerminalBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        closeTerminal();
+    });
+
+    // Add event listener for the mobile close button
+    mobileCloseBtn.addEventListener('click', closeTerminal);
+    mobileCloseBtn.addEventListener('touchend', (e) => {
         e.preventDefault();
         closeTerminal();
     });

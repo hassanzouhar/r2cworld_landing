@@ -229,3 +229,45 @@ h1 {
         font-size: 0.9em;
     }
 }
+
+@media (max-width: 480px) {
+    .window-controls {
+        display: flex;  /* Changed from 'none' to 'flex' */
+    }
+
+    .window-controls .control-button {
+        width: 20px;  /* Increased size for better touch targets */
+        height: 20px;
+    }
+
+    .window-controls .minimize,
+    .window-controls .fullscreen {
+        display: none;  /* Hide minimize and fullscreen on mobile */
+    }
+
+    .window-controls .close {
+        display: block;  /* Ensure close button is always visible */
+    }
+
+    .window-frame {
+        padding: 8px;
+    }
+
+    .terminal-content {
+        font-size: 0.9em;
+    }
+}
+
+/* Add this new style for a text-based close button */
+.mobile-close-btn {
+    display: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .mobile-close-btn {
+        display: block;
+    }
+}
