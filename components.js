@@ -78,7 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Loading screen and title animation
     setTimeout(() => {
         loadingScreen.style.display = 'none';
-        setTimeout(() => title.classList.add('visible'), 500);
+        setTimeout(() => {
+            title.classList.add('visible');
+        }, 500);
     }, 2000);
 
     // Terminal functionality
