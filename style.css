@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Orbitron', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.content {
+    text-align: center;
+    z-index: 1;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 10vw; /* Responsive font size */
+    font-weight: 700;
+    letter-spacing: 1rem;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s forwards 0.5s, pulse 4s ease-in-out infinite 2s;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.terminal-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1001; /* Ensure it's above the minimized terminal */
+}
+
+.terminal-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.terminal-window {
+    background-color: #2d3748;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 75%;
+    height: 75%;
+    transition: all 0.3s ease;
+}
+
+.window-frame {
+    background-color: #4a5568;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.window-title {
+    color: white;
+    font-weight: bold;
+}
+
+.window-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.control-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.minimize { background-color: #ecc94b; }
+.fullscreen { background-color: #48bb78; }
+.close { background-color: #f56565; }
+
+.terminal-content {
+    background-color: #1a202c;
+    color: #48bb78;
+    font-family: monospace;
+    padding: 16px;
+    height: calc(100% - 40px);
+    overflow-y: auto;
+}
+
+.command-line {
+    display: flex;
+    margin-top: 8px;
+}
+
+.prompt {
+    color: #4299e1;
+    margin-right: 8px;
+}
+
+#command-input {
+    background-color: transparent;
+    border: none;
+    color: #48bb78;
+    font-family: monospace;
+    font-size: 1em;
+    flex-grow: 1;
+    outline: none;
+}
+
+.minimized {
+    position: fixed;
+    bottom: 20px;
+    right: 240px; /* Position to the left of the Open Terminal button */
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.minimized .window-title {
+    font-size: 14px;
+}
+
+.minimized .window-controls {
+    display: none;
+}

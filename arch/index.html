@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R2C</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+        .container {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            background-image: url("");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+        }
+        .content {
+            text-align: center;
+            z-index: 1;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 10vw; /* Responsive font size */
+            font-weight: 700;
+            letter-spacing: 1rem;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s forwards 0.5s, pulse 4s ease-in-out infinite 2s;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .terminal-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .terminal-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .terminal-window {
+            background-color: #2d3748;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 75%;
+            height: 75%;
+            transition: all 0.3s ease;
+        }
+        .window-frame {
+            background-color: #4a5568;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .window-title {
+            color: white;
+            font-weight: bold;
+        }
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+        .control-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+        .minimize { background-color: #ecc94b; }
+        .fullscreen { background-color: #48bb78; }
+        .close { background-color: #f56565; }
+        .terminal-content {
+            background-color: #1a202c;
+            color: #48bb78;
+            font-family: monospace;
+            padding: 16px;
+            height: calc(100% - 40px);
+            overflow-y: auto;
+        }
+        .command-line {
+            display: flex;
+            margin-top: 8px;
+        }
+        .prompt {
+            color: #4299e1;
+            margin-right: 8px;
+        }
+        #command-input {
+            background-color: transparent;
+            border: none;
+            color: #48bb78;
+            font-family: monospace;
+            font-size: 1em;
+            flex-grow: 1;
+            outline: none;
+        }
+        .minimized {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            cursor: pointer;
+        }
+        .minimized .window-title {
+            font-size: 14px;
+        }
+        .minimized .window-controls {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <div class="content">
+            <h1>R2C</h1>
+        </div>
+    </div>
+    <button class="terminal-button" id="open-terminal">Open Terminal</button>
+
+    <div class="modal-overlay" id="terminal-modal">
+        <div class="terminal-window" id="terminal-window">
+            <div class="window-frame">
+                <div class="window-title">Terminal</div>
+                <div class="window-controls">
+                    <button class="control-button minimize" id="minimize-btn"></button>
+                    <button class="control-button fullscreen" id="fullscreen-btn"></button>
+                    <button class="control-button close" id="close-terminal"></button>
+                </div>
+            </div>
+            <div class="terminal-content" id="terminal-content">
+                <div>Welcome to the R2C terminal!</div>
+                <div class="command-line">
+                    <span class="prompt">user@r2c:~$</span>
+                    <input type="text" id="command-input" placeholder="Enter your command...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        const terminalModal = document.getElementById('terminal-modal');
+        const openTerminalBtn = document.getElementById('open-terminal');
+        const closeTerminalBtn = document.getElementById('close-terminal');
+        const minimizeBtn = document.getElementById('minimize-btn');
+        const terminalWindow = document.getElementById('terminal-window');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const terminalContent = document.getElementById('terminal-content');
+        const commandInput = document.getElementById('command-input');
+
+        let isFullscreen = false;
+        let isMinimized = false;
+
+        openTerminalBtn.addEventListener('click', () => {
+            terminalModal.style.display = 'flex';
+            if (isMinimized) {
+                toggleMinimize();
+            }
+        });
+
+        closeTerminalBtn.addEventListener('click', () => {
+            terminalModal.style.display = 'none';
+            if (isMinimized) {
+                toggleMinimize();
+            }
+        });
+
+        minimizeBtn.addEventListener('click', toggleMinimize);
+
+        function toggleMinimize() {
+            isMinimized = !isMinimized;
+            if (isMinimized) {
+                terminalWindow.classList.add('minimized');
+                terminalContent.style.display = 'none';
+            } else {
+                terminalWindow.classList.remove('minimized');
+                terminalContent.style.display = 'block';
+            }
+        }
+
+        terminalWindow.addEventListener('click', (e) => {
+            if (isMinimized && !e.target.classList.contains('control-button')) {
+                toggleMinimize();
+            }
+        });
+
+        fullscreenBtn.addEventListener('click', () => {
+            isFullscreen = !isFullscreen;
+            if (isFullscreen) {
+                terminalWindow.style.width = '100%';
+                terminalWindow.style.height = '100%';
+            } else {
+                terminalWindow.style.width = '75%';
+                terminalWindow.style.height = '75%';
+            }
+        });
+
+        commandInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const command = commandInput.value;
+                const outputDiv = document.createElement('div');
+                outputDiv.textContent = `user@r2c:~$ ${command}`;
+                terminalContent.insertBefore(outputDiv, terminalContent.lastElementChild);
+                
+                const responseDiv = document.createElement('div');
+                responseDiv.textContent = `Command '${command}' not recognized.`;
+                terminalContent.insertBefore(responseDiv, terminalContent.lastElementChild);
+                
+                commandInput.value = '';
+                terminalContent.scrollTop = terminalContent.scrollHeight;
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (isFullscreen) {
+                    isFullscreen = false;
+                    terminalWindow.style.width = '75%';
+                    terminalWindow.style.height = '75%';
+                } else if (!isMinimized) {
+                    terminalModal.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
