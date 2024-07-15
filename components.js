@@ -106,13 +106,7 @@ particlesJS('particles-js', {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener('DOMContentLoaded', () => {
     const loadingScreen = document.getElementById('loading-screen');
-
-    // Simulate loading time (remove this in production)
-    setTimeout(() => {
-        loadingScreen.style.display = 'none';
-    }, 2000);
     const terminalModal = document.getElementById('terminal-modal');
     const openTerminalBtn = document.getElementById('open-terminal');
     const closeTerminalBtn = document.getElementById('close-terminal');
@@ -121,6 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullscreenBtn = document.getElementById('fullscreen-btn');
     const terminalContent = document.getElementById('terminal-content');
     const commandInput = document.getElementById('command-input');
+
+    // Simulate loading time (remove this in production)
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+    }, 2000);
 
     // Add a text-based close button for mobile
     const mobileCloseBtn = document.createElement('div');
