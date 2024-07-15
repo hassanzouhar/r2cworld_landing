@@ -329,7 +329,7 @@
                 terminalContent.insertBefore(outputDiv, terminalContent.lastElementChild);
                 
                 const responseDiv = document.createElement('div');
-                responseDiv.textContent = `Command '${command}' not recognized.`;
+                responseDiv.textContent = `Command '${command}' not recognized. System is still bulding, please check back later.`;
                 terminalContent.insertBefore(responseDiv, terminalContent.lastElementChild);
                 
                 commandInput.value = '';
