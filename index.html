@@ -38,9 +38,10 @@
         .content {
             text-align: center;
             z-index: 1;
+            padding: 20px;
         }
         h1 {
-            font-size: 10rem;
+            font-size: 10vw; /* Responsive font size */
             font-weight: 700;
             letter-spacing: 1rem;
             opacity: 0;
@@ -88,7 +89,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(5px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -101,6 +102,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 75%;
             height: 75%;
+            transition: all 0.3s ease;
         }
         .window-frame {
             background-color: #4a5568;
@@ -152,6 +154,25 @@
             flex-grow: 1;
             outline: none;
         }
+        .minimized {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            cursor: pointer;
+        }
+        .minimized .window-title {
+            font-size: 14px;
+        }
+        .minimized .window-controls {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -168,7 +189,7 @@
             <div class="window-frame">
                 <div class="window-title">Terminal</div>
                 <div class="window-controls">
-                    <button class="control-button minimize"></button>
+                    <button class="control-button minimize" id="minimize-btn"></button>
                     <button class="control-button fullscreen" id="fullscreen-btn"></button>
                     <button class="control-button close" id="close-terminal"></button>
                 </div>
@@ -294,19 +315,46 @@
         const terminalModal = document.getElementById('terminal-modal');
         const openTerminalBtn = document.getElementById('open-terminal');
         const closeTerminalBtn = document.getElementById('close-terminal');
+        const minimizeBtn = document.getElementById('minimize-btn');
         const terminalWindow = document.getElementById('terminal-window');
         const fullscreenBtn = document.getElementById('fullscreen-btn');
         const terminalContent = document.getElementById('terminal-content');
         const commandInput = document.getElementById('command-input');
 
         let isFullscreen = false;
+        let isMinimized = false;
 
         openTerminalBtn.addEventListener('click', () => {
             terminalModal.style.display = 'flex';
+            if (isMinimized) {
+                toggleMinimize();
+            }
         });
 
         closeTerminalBtn.addEventListener('click', () => {
             terminalModal.style.display = 'none';
+            if (isMinimized) {
+                toggleMinimize();
+            }
+        });
+
+        minimizeBtn.addEventListener('click', toggleMinimize);
+
+        function toggleMinimize() {
+            isMinimized = !isMinimized;
+            if (isMinimized) {
+                terminalWindow.classList.add('minimized');
+                terminalContent.style.display = 'none';
+            } else {
+                terminalWindow.classList.remove('minimized');
+                terminalContent.style.display = 'block';
+            }
+        }
+
+        terminalWindow.addEventListener('click', (e) => {
+            if (isMinimized && !e.target.classList.contains('control-button')) {
+                toggleMinimize();
+            }
         });
 
         fullscreenBtn.addEventListener('click', () => {
@@ -329,7 +377,7 @@
                 terminalContent.insertBefore(outputDiv, terminalContent.lastElementChild);
                 
                 const responseDiv = document.createElement('div');
-                responseDiv.textContent = `Command '${command}' not recognized. System is still bulding, please check back later.`;
+                responseDiv.textContent = `Command '${command}' not recognized.`;
                 terminalContent.insertBefore(responseDiv, terminalContent.lastElementChild);
                 
                 commandInput.value = '';
@@ -343,7 +391,7 @@
                     isFullscreen = false;
                     terminalWindow.style.width = '75%';
                     terminalWindow.style.height = '75%';
-                } else {
+                } else if (!isMinimized) {
                     terminalModal.style.display = 'none';
                 }
             }
