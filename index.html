@@ -65,6 +65,93 @@
                 transform: scale(1);
             }
         }
+        .terminal-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .terminal-button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .terminal-window {
+            background-color: #2d3748;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 75%;
+            height: 75%;
+        }
+        .window-frame {
+            background-color: #4a5568;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .window-title {
+            color: white;
+            font-weight: bold;
+        }
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+        .control-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+        .minimize { background-color: #ecc94b; }
+        .fullscreen { background-color: #48bb78; }
+        .close { background-color: #f56565; }
+        .terminal-content {
+            background-color: #1a202c;
+            color: #48bb78;
+            font-family: monospace;
+            padding: 16px;
+            height: calc(100% - 40px);
+            overflow-y: auto;
+        }
+        .command-line {
+            display: flex;
+            margin-top: 8px;
+        }
+        .prompt {
+            color: #4299e1;
+            margin-right: 8px;
+        }
+        #command-input {
+            background-color: transparent;
+            border: none;
+            color: #48bb78;
+            font-family: monospace;
+            font-size: 1em;
+            flex-grow: 1;
+            outline: none;
+        }
     </style>
 </head>
 <body>
@@ -72,6 +159,27 @@
     <div class="container">
         <div class="content">
             <h1>R2C</h1>
+        </div>
+    </div>
+    <button class="terminal-button" id="open-terminal">Open Terminal</button>
+
+    <div class="modal-overlay" id="terminal-modal">
+        <div class="terminal-window" id="terminal-window">
+            <div class="window-frame">
+                <div class="window-title">Terminal</div>
+                <div class="window-controls">
+                    <button class="control-button minimize"></button>
+                    <button class="control-button fullscreen" id="fullscreen-btn"></button>
+                    <button class="control-button close" id="close-terminal"></button>
+                </div>
+            </div>
+            <div class="terminal-content" id="terminal-content">
+                <div>Welcome to the R2C terminal!</div>
+                <div class="command-line">
+                    <span class="prompt">user@r2c:~$</span>
+                    <input type="text" id="command-input" placeholder="Enter your command...">
+                </div>
+            </div>
         </div>
     </div>
 
@@ -181,6 +289,64 @@
                 }
             },
             "retina_detect": true
+        });
+
+        const terminalModal = document.getElementById('terminal-modal');
+        const openTerminalBtn = document.getElementById('open-terminal');
+        const closeTerminalBtn = document.getElementById('close-terminal');
+        const terminalWindow = document.getElementById('terminal-window');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const terminalContent = document.getElementById('terminal-content');
+        const commandInput = document.getElementById('command-input');
+
+        let isFullscreen = false;
+
+        openTerminalBtn.addEventListener('click', () => {
+            terminalModal.style.display = 'flex';
+        });
+
+        closeTerminalBtn.addEventListener('click', () => {
+            terminalModal.style.display = 'none';
+        });
+
+        fullscreenBtn.addEventListener('click', () => {
+            isFullscreen = !isFullscreen;
+            if (isFullscreen) {
+                terminalWindow.style.width = '100%';
+                terminalWindow.style.height = '100%';
+            } else {
+                terminalWindow.style.width = '75%';
+                terminalWindow.style.height = '75%';
+            }
+        });
+
+        commandInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const command = commandInput.value;
+                const outputDiv = document.createElement('div');
+                outputDiv.textContent = `user@r2c:~$ ${command}`;
+                terminalContent.insertBefore(outputDiv, terminalContent.lastElementChild);
+                
+                const responseDiv = document.createElement('div');
+                responseDiv.textContent = `Command '${command}' not recognized.`;
+                terminalContent.insertBefore(responseDiv, terminalContent.lastElementChild);
+                
+                commandInput.value = '';
+                terminalContent.scrollTop = terminalContent.scrollHeight;
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (isFullscreen) {
+                    isFullscreen = false;
+                    terminalWindow.style.width = '75%';
+                    terminalWindow.style.height = '75%';
+                } else {
+                    terminalModal.style.display = 'none';
+                }
+            }
         });
     </script>
 </body>
