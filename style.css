@@ -38,7 +38,7 @@ body, html {
 }
 
 h1 {
-    font-size: 10vw; /* Responsive font size */
+    font-size: 10vw;
     font-weight: 700;
     letter-spacing: 1rem;
     opacity: 0;
@@ -78,7 +78,7 @@ h1 {
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 1001; /* Ensure it's above the minimized terminal */
+    z-index: 1001;
 }
 
 .terminal-button:hover {
@@ -107,6 +107,8 @@ h1 {
     width: 75%;
     height: 75%;
     transition: all 0.3s ease;
+    max-width: 900px;
+    max-height: 600px;
 }
 
 .window-frame {
@@ -171,7 +173,7 @@ h1 {
 .minimized {
     position: fixed;
     bottom: 20px;
-    right: 240px; /* Position to the left of the Open Terminal button */
+    right: 240px;
     width: 200px;
     height: 40px;
     border-radius: 20px;
@@ -189,4 +191,41 @@ h1 {
 
 .minimized .window-controls {
     display: none;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 15vw;
+        letter-spacing: 0.5rem;
+    }
+
+    .terminal-window {
+        width: 90%;
+        height: 80%;
+    }
+
+    .minimized {
+        right: 20px;
+        bottom: 70px;
+        width: calc(100% - 40px);
+    }
+
+    .terminal-button {
+        width: calc(100% - 40px);
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .window-controls {
+        display: none;
+    }
+
+    .window-frame {
+        padding: 8px;
+    }
+
+    .terminal-content {
+        font-size: 0.9em;
+    }
 }

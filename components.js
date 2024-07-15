@@ -119,21 +119,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let isFullscreen = false;
     let isMinimized = false;
 
-    openTerminalBtn.addEventListener('click', () => {
+    function openTerminal() {
         terminalModal.style.display = 'flex';
         if (isMinimized) {
             toggleMinimize();
         }
-    });
+    }
 
-    closeTerminalBtn.addEventListener('click', () => {
+    function closeTerminal() {
         terminalModal.style.display = 'none';
         if (isMinimized) {
             toggleMinimize();
         }
-    });
-
-    minimizeBtn.addEventListener('click', toggleMinimize);
+    }
 
     function toggleMinimize() {
         isMinimized = !isMinimized;
@@ -150,20 +148,55 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function toggleFullscreen() {
+        isFullscreen = !isFullscreen;
+        if (isFullscreen) {
+            terminalWindow.style.width = '100%';
+            terminalWindow.style.height = '100%';
+            terminalWindow.style.maxWidth = '100%';
+            terminalWindow.style.maxHeight = '100%';
+        } else {
+            terminalWindow.style.width = '';
+            terminalWindow.style.height = '';
+            terminalWindow.style.maxWidth = '';
+            terminalWindow.style.maxHeight = '';
+        }
+    }
+
+    openTerminalBtn.addEventListener('click', openTerminal);
+    openTerminalBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        openTerminal();
+    });
+
+    closeTerminalBtn.addEventListener('click', closeTerminal);
+    closeTerminalBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        closeTerminal();
+    });
+
+    minimizeBtn.addEventListener('click', toggleMinimize);
+    minimizeBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        toggleMinimize();
+    });
+
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    fullscreenBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        toggleFullscreen();
+    });
+
     terminalWindow.addEventListener('click', (e) => {
         if (isMinimized && !e.target.classList.contains('control-button')) {
             toggleMinimize();
         }
     });
 
-    fullscreenBtn.addEventListener('click', () => {
-        isFullscreen = !isFullscreen;
-        if (isFullscreen) {
-            terminalWindow.style.width = '100%';
-            terminalWindow.style.height = '100%';
-        } else {
-            terminalWindow.style.width = '75%';
-            terminalWindow.style.height = '75%';
+    terminalWindow.addEventListener('touchend', (e) => {
+        if (isMinimized && !e.target.classList.contains('control-button')) {
+            e.preventDefault();
+            toggleMinimize();
         }
     });
 
@@ -187,12 +220,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             if (isFullscreen) {
-                isFullscreen = false;
-                terminalWindow.style.width = '75%';
-                terminalWindow.style.height = '75%';
+                toggleFullscreen();
             } else if (!isMinimized) {
-                terminalModal.style.display = 'none';
+                closeTerminal();
             }
+        }
+    });
+
+    // Handle mobile keyboard issues
+    window.addEventListener('resize', () => {
+        if (document.activeElement.tagName === 'INPUT') {
+            window.setTimeout(() => {
+                document.activeElement.scrollIntoView();
+            }, 0);
         }
     });
 });
