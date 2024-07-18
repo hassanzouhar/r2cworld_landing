@@ -75,4 +75,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 - [particles.js](https://vincentgarreau.com/particles.js/) for the interactive background
-- [Google Fonts](https://fonts.google.com/) for the Orbitron font
+- [Google Fonts](https://fonts.google.com/) for the Orbitron fon
