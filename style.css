@@ -37,7 +37,7 @@ body, html {
     padding: 20px;
 }
 
-h1 {
+#r2c-title {
     font-size: 10vw;
     font-weight: 700;
     letter-spacing: 1rem;
@@ -47,22 +47,40 @@ h1 {
     text-shadow: 0 0 10px rgba(255,255,255,0.5);
 }
 
-h1.visible {
+#r2c-title.visible {
     opacity: 1;
     transform: translateY(0);
     animation: pulse 4s ease-in-out infinite 2s;
 }
 
+#r2c-logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 1s, transform 1s;
+    z-index: 10;
+}
+
+#r2c-logo.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+#r2c-logo.hidden {
+    display: none;
+}
+
+#r2c-logo svg {
+    width: 60px;
+    height: 60px;
+}
+
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 .terminal-button {
@@ -193,9 +211,14 @@ h1.visible {
 }
 
 @media (max-width: 768px) {
-    h1 {
+    #r2c-title {
         font-size: 15vw;
         letter-spacing: 0.5rem;
+    }
+
+    #r2c-logo svg {
+        width: 50px;
+        height: 50px;
     }
 
     .terminal-window {
@@ -216,36 +239,27 @@ h1.visible {
 }
 
 @media (max-width: 480px) {
+    #r2c-logo svg {
+        width: 40px;
+        height: 40px;
+    }
+
     .window-controls {
-        display: none;
-    }
-
-    .window-frame {
-        padding: 8px;
-    }
-
-    .terminal-content {
-        font-size: 0.9em;
-    }
-}
-
-@media (max-width: 480px) {
-    .window-controls {
-        display: flex;  /* Changed from 'none' to 'flex' */
+        display: flex;
     }
 
     .window-controls .control-button {
-        width: 20px;  /* Increased size for better touch targets */
+        width: 20px;
         height: 20px;
     }
 
     .window-controls .minimize,
     .window-controls .fullscreen {
-        display: none;  /* Hide minimize and fullscreen on mobile */
+        display: none;
     }
 
     .window-controls .close {
-        display: block;  /* Ensure close button is always visible */
+        display: block;
     }
 
     .window-frame {
@@ -257,7 +271,6 @@ h1.visible {
     }
 }
 
-/* Add this new style for a text-based close button */
 .mobile-close-btn {
     display: none;
     color: white;
@@ -270,6 +283,7 @@ h1.visible {
         display: block;
     }
 }
+
 #loading-screen {
     position: fixed;
     top: 0;

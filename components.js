@@ -61,7 +61,8 @@ particlesJS('particles-js', particleConfig);
 document.addEventListener('DOMContentLoaded', () => {
     // DOM element references
     const loadingScreen = document.getElementById('loading-screen');
-    const title = document.querySelector('h1');
+    const r2cTitle = document.getElementById('r2c-title');
+    const r2cLogo = document.getElementById('r2c-logo');
     const terminalModal = document.getElementById('terminal-modal');
     const openTerminalBtn = document.getElementById('open-terminal');
     const closeTerminalBtn = document.getElementById('close-terminal');
@@ -79,7 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         loadingScreen.style.display = 'none';
         setTimeout(() => {
-            title.classList.add('visible');
+            r2cTitle.classList.add('visible');
+            setTimeout(() => {
+                r2cTitle.classList.remove('visible');
+                r2cTitle.style.display = 'none';
+                r2cLogo.classList.remove('hidden');
+                setTimeout(() => {
+                    r2cLogo.classList.add('visible');
+                }, 50);
+            }, 5000); // Wait for 5 seconds before transforming to logo
         }, 500);
     }, 2000);
 
