@@ -1,5 +1,6 @@
 class NeuralNet {
     constructor(canvas) {
+        console.log('Initializing NeuralNet'); // Debugging log
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.width = canvas.width;
@@ -19,6 +20,7 @@ class NeuralNet {
     }
 
     init() {
+        console.log('Initializing nodes and connections'); // Debugging log
         const nodeCount = 100;
         for (let i = 0; i < nodeCount; i++) {
             this.nodes.push({
@@ -104,10 +106,12 @@ class NeuralNet {
     }
 
     addElement(element) {
+        console.log('Adding element to interaction:', element); // Debugging log
         this.elements.push(element);
     }
 
     resize(width, height) {
+        console.log('Resizing canvas to', width, height); // Debugging log
         this.width = width;
         this.height = height;
         this.canvas.width = width;
@@ -117,6 +121,7 @@ class NeuralNet {
 
 // Initialize the neural net when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded and parsed'); // Debugging log
     const canvas = document.getElementById('neural-net');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;

@@ -1,5 +1,7 @@
 // Main application logic
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Initializing components.js'); // Debugging log
+
     // DOM element references
     const loadingScreen = document.getElementById('loading-screen');
     const r2cTitle = document.getElementById('r2c-title');
@@ -22,27 +24,32 @@ document.addEventListener('DOMContentLoaded', () => {
     let isAudioPlaying = false;
 
     // Initialize Wave.js
-    const wave = new Wave(audioElement, canvasElement);
+    if (window.Wave) {
+        console.log('Initializing Wave.js'); // Debugging log
+        const wave = new Wave(audioElement, canvasElement);
 
-    // Add Wave.js animation
-    wave.addAnimation(new wave.animations.Cubes({
-        count: 20,
-        top: {
-            color: 'rgba(255, 255, 255, 0.3)',
-            highlight: 'rgba(255, 255, 255, 0.8)'
-        },
-        right: {
-            color: 'rgba(255, 255, 255, 0.2)',
-            highlight: 'rgba(255, 255, 255, 0.6)'
-        },
-        left: {
-            color: 'rgba(255, 255, 255, 0.1)',
-            highlight: 'rgba(255, 255, 255, 0.4)'
-        },
-        removeCubes: true,
-        radius: 10,
-        rotationCount: 0
-    }));
+        // Add Wave.js animation
+        wave.addAnimation(new wave.animations.Cubes({
+            count: 20,
+            top: {
+                color: 'rgba(255, 255, 255, 0.3)',
+                highlight: 'rgba(255, 255, 255, 0.8)'
+            },
+            right: {
+                color: 'rgba(255, 255, 255, 0.2)',
+                highlight: 'rgba(255, 255, 255, 0.6)'
+            },
+            left: {
+                color: 'rgba(255, 255, 255, 0.1)',
+                highlight: 'rgba(255, 255, 255, 0.4)'
+            },
+            removeCubes: true,
+            radius: 10,
+            rotationCount: 0
+        }));
+    } else {
+        console.error('Wave.js not loaded'); // Debugging log
+    }
 
     // Loading screen and title animation
     setTimeout(() => {
@@ -67,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 5000); // Wait for 5 seconds before transforming to logo
         }, 500);
     }, 2000);
-
 
     // Audio play/pause functionality
     function toggleAudio() {
