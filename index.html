@@ -6,24 +6,24 @@
     <title>R2C - Restless Rebel Collective | Innovative Tech Solutions</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="A Collective for those who want to try something different and see change happen.">
-    <meta name="keywords" content="Restless Rebel Collective, technology, AI, tech solutions, insight, UX, CX">
+    <meta name="description" content="R2C (Restless Rebel Collective) offers cutting-edge technology solutions. Join us in shaping the future of innovation.">
+    <meta name="keywords" content="R2C, Restless Rebel Collective, technology, innovation, tech solutions">
     <meta name="author" content="R2C">
-    <link rel="canonical" href="https://www.r2c.world">
+    <link rel="canonical" href="https://www.r2c-collective.com">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.r2c.world">
-    <meta property="og:title" content="Restless Rebel Collective">
-    <meta property="og:description" content="R2C is just built different. Join us now.">
-    <meta property="og:image" content="https://www.r2c.world/img/r2c-og-image.jpg">
+    <meta property="og:url" content="https://www.r2c-collective.com">
+    <meta property="og:title" content="R2C - Restless Rebel Collective | Innovative Tech Solutions">
+    <meta property="og:description" content="R2C (Restless Rebel Collective) offers cutting-edge technology solutions. Join us in shaping the future of innovation.">
+    <meta property="og:image" content="https://www.r2c-collective.com/images/r2c-og-image.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.r2c.world">
-    <meta property="twitter:title" content="Restless Rebel Collective">
-    <meta property="twitter:description" content="R2C is just built different. Join us now.">
-    <meta property="twitter:image" content="https://www.r2c.world/img/r2c-twitter-image.jpg">
+    <meta property="twitter:url" content="https://www.r2c-collective.com">
+    <meta property="twitter:title" content="R2C - Restless Rebel Collective | Innovative Tech Solutions">
+    <meta property="twitter:description" content="R2C (Restless Rebel Collective) offers cutting-edge technology solutions. Join us in shaping the future of innovation.">
+    <meta property="twitter:image" content="https://www.r2c-collective.com/images/r2c-twitter-image.jpg">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -33,6 +33,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
+    <!-- Wave.js for audio visualization -->
+    <script src="https://cdn.jsdelivr.net/gh/foobar404/wave.js/dist/bundle.js"></script>
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -40,36 +43,44 @@
       "@type": "Organization",
       "name": "R2C - Restless Rebel Collective",
       "description": "R2C (Restless Rebel Collective) offers cutting-edge technology solutions.",
-      "url": "https://www.r2c.world",
-      "logo": "https://www.r2c.world/img/r2c-logo.png",
+      "url": "https://www.r2c-collective.com",
+      "logo": "https://www.r2c-collective.com/images/r2c-logo.png",
       "sameAs": [
-        "https://www.twitter.com/RRC_HQ",
+        "https://www.facebook.com/R2CCollective",
+        "https://www.twitter.com/R2CCollective",
+        "https://www.linkedin.com/company/r2c-collective"
       ]
     }
     </script>
 </head>
 <body>
+    <!-- Neural Network Animation Canvas -->
+    <canvas id="neural-net"></canvas>
+
+    <!-- Loading Screen -->
     <div id="loading-screen">
         <div class="loader"></div>
     </div>
 
-    <div id="particles-js"></div>
-
-    <div id="r2c-logo" class="hidden">
+    <!-- R2C Logo -->
+    <div id="r2c-logo" class="hidden interact-with-net">
         <svg width="100" height="100" viewBox="0 0 200 200">
-            <circle cx="100" cy="100" r="90" fill="none" stroke="#fff" stroke-width="10" />
-            <text x="100" y="120" text-anchor="middle" fill="#fff" font-size="60" font-family="Orbitron">R2C</text>
+            <circle cx="100" cy="100" r="90" fill="none" stroke="#fff" stroke-width="10"></circle>
+            <text x="100" y="120" text-anchor="middle" fill="#fff" font-size="80" font-family="Orbitron">R2C</text>
         </svg>
     </div>
 
+    <!-- Main Content -->
     <div class="container">
         <div class="content">
-            <h1 id="r2c-title">R2C</h1>
+            <h1 id="r2c-title" class="interact-with-net">R2C</h1>
         </div>
     </div>
 
-   <!-- <button id="open-terminal" class="terminal-button">⌘ Terminal</button>-->
+    <!-- Terminal Button -->
+    <button id="open-terminal" class="terminal-button interact-with-net">⌘ Terminal</button>
 
+    <!-- Terminal Modal -->
     <div id="terminal-modal" class="modal-overlay">
         <div id="terminal-window" class="terminal-window">
             <div class="window-frame">
@@ -91,7 +102,20 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Audio Element -->
+    <audio id="background-audio" loop>
+        <source src="/audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Audio Control Button -->
+    <button id="play-audio" class="audio-button interact-with-net" style="display: none;">▶ Play Audio</button>
+
+    <!-- Audio Visualizer Canvas -->
+    <canvas id="audio-visualizer"></canvas>
+
+    <!-- Scripts -->
+    <script src="neuralNet.js"></script>
     <script src="components.js"></script>
 </body>
 </html>

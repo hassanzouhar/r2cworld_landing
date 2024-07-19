@@ -1,62 +1,3 @@
-// Particle.js configuration
-const particleConfig = {
-    "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#ffffff" },
-        "shape": {
-            "type": "circle",
-            "stroke": { "width": 0, "color": "#000000" },
-            "polygon": { "nb_sides": 5 }
-        },
-        "opacity": {
-            "value": 0.5,
-            "random": false,
-            "anim": { "enable": false, "speed": 1, "opacity_min": 0.1, "sync": false }
-        },
-        "size": {
-            "value": 3,
-            "random": true,
-            "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false }
-        },
-        "line_linked": {
-            "enable": true,
-            "distance": 150,
-            "color": "#ffffff",
-            "opacity": 0.4,
-            "width": 1
-        },
-        "move": {
-            "enable": true,
-            "speed": 1,
-            "direction": "none",
-            "random": false,
-            "straight": false,
-            "out_mode": "out",
-            "bounce": false,
-            "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 }
-        }
-    },
-    "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-            "onhover": { "enable": true, "mode": "grab" },
-            "onclick": { "enable": true, "mode": "push" },
-            "resize": true
-        },
-        "modes": {
-            "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
-            "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 },
-            "repulse": { "distance": 200, "duration": 0.4 },
-            "push": { "particles_nb": 4 },
-            "remove": { "particles_nb": 2 }
-        }
-    },
-    "retina_detect": true
-};
-
-// Initialize particles
-particlesJS('particles-js', particleConfig);
-
 // Main application logic
 document.addEventListener('DOMContentLoaded', () => {
     // DOM element references
@@ -71,10 +12,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullscreenBtn = document.getElementById('fullscreen-btn');
     const terminalContent = document.getElementById('terminal-content');
     const commandInput = document.getElementById('command-input');
+    const audioElement = document.getElementById('background-audio');
+    const canvasElement = document.getElementById('audio-visualizer');
+    const playAudioBtn = document.getElementById('play-audio');
 
     // State variables
     let isFullscreen = false;
     let isMinimized = false;
+    let isAudioPlaying = false;
+
+    // Initialize Wave.js
+    const wave = new Wave(audioElement, canvasElement);
+
+    // Add Wave.js animation
+    wave.addAnimation(new wave.animations.Cubes({
+        count: 20,
+        top: {
+            color: 'rgba(255, 255, 255, 0.3)',
+            highlight: 'rgba(255, 255, 255, 0.8)'
+        },
+        right: {
+            color: 'rgba(255, 255, 255, 0.2)',
+            highlight: 'rgba(255, 255, 255, 0.6)'
+        },
+        left: {
+            color: 'rgba(255, 255, 255, 0.1)',
+            highlight: 'rgba(255, 255, 255, 0.4)'
+        },
+        removeCubes: true,
+        radius: 10,
+        rotationCount: 0
+    }));
 
     // Loading screen and title animation
     setTimeout(() => {
@@ -87,10 +55,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 r2cLogo.classList.remove('hidden');
                 setTimeout(() => {
                     r2cLogo.classList.add('visible');
+                    playAudioBtn.style.display = 'block'; // Show play button after animations
+                    
+                    // Add elements to neural net after animations
+                    if (window.neuralNet) {
+                        document.querySelectorAll('.interact-with-net').forEach(element => {
+                            window.neuralNet.addElement(element);
+                        });
+                    }
                 }, 50);
             }, 5000); // Wait for 5 seconds before transforming to logo
         }, 500);
     }, 2000);
+
+
+    // Audio play/pause functionality
+    function toggleAudio() {
+        if (isAudioPlaying) {
+            audioElement.pause();
+            playAudioBtn.textContent = '▶ Play Audio';
+            canvasElement.style.opacity = '0';
+        } else {
+            audioElement.play();
+            playAudioBtn.textContent = '⏸ Pause Audio';
+            canvasElement.style.opacity = '1';
+        }
+        isAudioPlaying = !isAudioPlaying;
+    }
+
+    playAudioBtn.addEventListener('click', toggleAudio);
 
     // Terminal functionality
     function openTerminal() {
@@ -170,10 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Mobile-specific functionality
-    const mobileCloseBtn = document.createElement('div');
-    mobileCloseBtn.className = 'mobile-close-btn';
-    mobileCloseBtn.textContent = 'Close';
-    terminalWindow.querySelector('.window-frame').appendChild(mobileCloseBtn);
+    const mobileCloseBtn = document.querySelector('.mobile-close-btn');
 
     function addTouchListener(element, handler) {
         element.addEventListener('touchend', (e) => {
@@ -200,5 +190,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.activeElement.tagName === 'INPUT') {
             window.setTimeout(() => document.activeElement.scrollIntoView(), 0);
         }
+    });
+
+    // Function to add new elements to the neural net interaction
+    function addElementToNeuralNet(element) {
+        if (window.neuralNet) {
+            window.neuralNet.addElement(element);
+        }
+    }
+
+    // Example of how to use addElementToNeuralNet:
+    // If you dynamically create new elements that should interact with the neural net:
+    // const newElement = document.createElement('div');
+    // document.body.appendChild(newElement);
+    // addElementToNeuralNet(newElement);
+
+    // Initialize neural net interaction for existing elements
+    document.querySelectorAll('.interact-with-net').forEach(element => {
+        addElementToNeuralNet(element);
     });
 });
