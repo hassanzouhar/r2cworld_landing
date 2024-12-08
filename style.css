@@ -18,7 +18,7 @@ header {
     text-align: center;
     padding: 30px 10px;
     border-bottom: 8px solid #000; /* Bold divider */
-    box-shadow: 0 5px 0 #000; /* Hard shadow for a playful "cutout" look */
+    box-shadow: 0 15px 0 #000; /* Hard shadow for a playful "cutout" look */
 }
 
 header h1 {
