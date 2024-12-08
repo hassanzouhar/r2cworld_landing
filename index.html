@@ -5,71 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brutalist Blog</title>
     <style>
+        /* General styles */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            color: #000;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f1f1f1;
+            color: #222;
             margin: 0;
             padding: 0;
         }
+
+        /* Header styles */
         header {
-            background-color: #000;
+            background-color: #ff4136; /* Vivid red */
             color: #fff;
-            padding: 20px;
             text-align: center;
+            padding: 30px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
+
         header h1 {
             margin: 0;
-            font-size: 2.5em;
+            font-size: 3em;
+            text-transform: uppercase;
         }
+
         header p {
-            margin: 0;
-            font-size: 1em;
+            font-size: 1.2em;
+            margin: 10px 0 0;
             font-style: italic;
         }
+
+        /* Navigation bar */
         nav {
-            background-color: #ddd;
-            padding: 10px;
+            background-color: #2ecc40; /* Bright green */
             text-align: center;
+            padding: 10px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
+
         nav a {
-            margin: 0 10px;
+            margin: 0 15px;
             text-decoration: none;
-            color: #000;
+            color: #fff;
+            font-size: 1.2em;
             font-weight: bold;
         }
+
         nav a:hover {
             text-decoration: underline;
         }
+
+        /* Main content area */
         main {
             padding: 20px;
         }
+
         article {
-            border: 2px solid #000;
-            padding: 20px;
-            margin-bottom: 20px;
             background-color: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border: 3px solid #ff851b; /* Bold orange */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
+
         article h2 {
-            margin-top: 0;
+            margin: 0 0 10px;
             font-size: 2em;
+            color: #ff4136; /* Match header red */
         }
+
         article p {
-            line-height: 1.5;
+            line-height: 1.6;
         }
+
+        article p strong {
+            color: #2ecc40; /* Match navigation green */
+        }
+
+        /* Footer */
         footer {
-            background-color: #000;
+            background-color: #0074d9; /* Vivid blue */
             color: #fff;
             text-align: center;
-            padding: 10px;
-            font-size: 0.9em;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 1em;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>My Brutalist Blog</h1>
-        <p>Raw. Bold. Honest.</p>
+        <h1>Brutalist Blog</h1>
+        <p>Bold Colors, Raw Aesthetics</p>
     </header>
     <nav>
         <a href="#home">Home</a>
@@ -78,18 +106,18 @@
     </nav>
     <main>
         <article>
-            <h2>Post Title</h2>
-            <p><strong>Date:</strong> January 1, 2024</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+            <h2>First Post</h2>
+            <p><strong>Date:</strong> December 1, 2024</p>
+            <p>Welcome to the world of Brutalist design! This is a place where bold colors and raw aesthetics meet functionality. Dive in and explore the unapologetic style.</p>
         </article>
         <article>
             <h2>Another Post</h2>
-            <p><strong>Date:</strong> January 2, 2024</p>
-            <p>Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.</p>
+            <p><strong>Date:</strong> December 2, 2024</p>
+            <p>Brutalism isn't just about concrete. It's about creating impactful designs that refuse to conform. Here's how we bring that ethos to the web.</p>
         </article>
     </main>
     <footer>
-        &copy; 2024 My Brutalist Blog. All rights reserved.
+        &copy; 2024 Brutalist Blog. All rights reserved.
     </footer>
 </body>
 </html>
