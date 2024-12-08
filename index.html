@@ -4,96 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R2C.world</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
-    <style>
-        /* General styles */
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #f1f1f1;
-            color: #222;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Header styles */
-        header {
-            background-color: #ff4136;
-            color: #fff;
-            text-align: center;
-            padding: 30px 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 3em;
-            text-transform: uppercase;
-        }
-
-        header p {
-            font-size: 1.2em;
-            margin: 10px 0 0;
-            font-style: italic;
-        }
-
-        /* Navigation bar */
-        nav {
-            background-color: #2ecc40;
-            text-align: center;
-            padding: 10px 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #fff;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        /* Main content area */
-        main {
-            padding: 20px;
-        }
-
-        article {
-            background-color: #fff;
-            margin: 20px 0;
-            padding: 20px;
-            border: 3px solid #ff851b;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        article h2 {
-            margin: 0 0 10px;
-            font-size: 2em;
-            color: #ff4136;
-        }
-
-        article p {
-            line-height: 1.6;
-        }
-
-        article p strong {
-            color: #2ecc40;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #0074d9;
-            color: #fff;
-            text-align: center;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 1em;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
-        }
-    </style>
+    <script defer src="scripts.js"></script>
 </head>
 <body>
     <header>
@@ -101,10 +14,11 @@
         <p>Evolution is digital.</p>
     </header>
     <nav>
-        <a href="#home" onclick="loadPage('home.md')">Home</a>
-        <a href="#about" onclick="loadPage('about.md')">About</a>
-        <a href="#contact" onclick="loadPage('contact.md')">Contact</a>
-        <a href="#projects" onclick="loadPage('projects.md')">Projects</a>
+        <a href="#home" onclick="loadPage('pages/home.md')">home</a>
+        <a href="#about" onclick="loadPage('pages/about.md')">about</a>
+        <a href="#projects" onclick="loadPage('pages/projects.md')">projects</a>
+        <a href="#contact" onclick="loadPage('pages/contact.md')">contact</a>
+        <a href="#blog" onclick="loadBlogPosts()">blog</a>
     </nav>
     <main id="content">
         <article>
@@ -113,26 +27,7 @@
         </article>
     </main>
     <footer>
-        &copy; 2024 Brutalist Blog. All rights reserved.
+        &copy; 2024 r2c.world - All rights reserved.
     </footer>
-
-    <script>
-        // Function to load and display Markdown content
-        async function loadPage(mdFile) {
-            const contentDiv = document.getElementById('content');
-            try {
-                const response = await fetch(mdFile);
-                if (!response.ok) throw new Error('Markdown file not found');
-                const mdContent = await response.text();
-                contentDiv.innerHTML = marked.parse(mdContent);
-            } catch (error) {
-                contentDiv.innerHTML = `<article><h2>Error</h2><p>Could not load content. Please try again later.</p></article>`;
-                console.error(error);
-            }
-        }
-
-        // Automatically load home page content on page load
-        window.onload = () => loadPage('home.md');
-    </script>
 </body>
 </html>
