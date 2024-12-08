@@ -20,6 +20,21 @@ header {
     border-bottom: 8px solid #000; /* unapologetic bold divider */
 }
 
+header h1 {
+    margin: 0;
+    font-size: 4em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px #000; /* aggressive shadow for impact */
+}
+
+header p {
+    font-size: 1.5em;
+    margin: 10px 0 0;
+    font-style: italic;
+    text-shadow: 1px 1px #000;
+}
+
 /* Navigation Bar */
 nav {
     grid-row: 2; /* Place navbar in the second row */
@@ -29,12 +44,31 @@ nav {
     border-bottom: 5px solid #000;
 }
 
+nav a {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #000; /* black text for contrast */
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px 15px;
+    background-color: #fff; /* white background for links */
+    border: 3px solid #000;
+    transition: all 0.2s ease-in-out;
+}
+
+nav a:hover {
+    color: #fff; /* invert hover state */
+    background-color: #000;
+    border-color: #ff0000; /* red border on hover */
+    text-shadow: 1px 1px #ff0000;
+}
+
 /* Main Content */
 main {
     grid-row: 3; /* Place main content in the third row */
     display: grid;
     grid-auto-rows: min-content; /* Row height adapts to content */
-    grid-auto-columns: min-content; /* Column width adapts to content */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible grid */
     gap: 20px;
     padding: 20px;
     background-color: #f5f5f5; /* subtle light gray for separation */
@@ -50,9 +84,8 @@ article {
     margin: 0 auto;
     padding: 30px;
     border: 8px solid #000; /* strong borders for brutalist style */
-    border-radius: 0; /* no rounded corners for a raw look */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* hard shadow for depth */
     max-width: 100%; /* Allow full width for content */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* hard shadow for depth */
 }
 
 article h2 {
@@ -88,9 +121,9 @@ article .meta span {
     margin: 0 auto;
     padding: 20px;
     border: 8px solid #000;
+    max-width: 100%; /* Allow full width for dynamic content */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     text-align: left;
-    max-width: 100%; /* Allow full width for dynamic content */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
