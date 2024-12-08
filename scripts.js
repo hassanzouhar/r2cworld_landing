@@ -82,13 +82,21 @@ async function loadBlogPosts() {
     }
 }
 
+// Function to ensure a container exists or create it dynamically
+function ensureContainerExists(containerId) {
+    let container = document.getElementById(containerId);
+    if (!container) {
+        container = document.createElement('div');
+        container.id = containerId;
+        container.className = 'content-box';
+        document.getElementById('content').appendChild(container);
+    }
+    return container;
+}
+
 // Function to load content into specific boxes dynamically
 async function loadContentIntoBox(mdFile, boxId) {
-    const box = document.getElementById(boxId);
-    if (!box) {
-        console.error(`Box with ID "${boxId}" not found`);
-        return;
-    }
+    const box = ensureContainerExists(boxId);
     const htmlContent = await fetchMarkdown(mdFile);
     box.innerHTML = htmlContent;
 }
