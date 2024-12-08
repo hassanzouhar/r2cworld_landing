@@ -211,3 +211,10 @@ footer {
     box-shadow: 6px 6px 0 #000;
     transform: translate(-2px, -2px);
 }
+.hero-image {
+    width: 100%; /* Ensures the image spans the width of its container */
+    height: auto; /* Maintains the aspect ratio */
+    object-fit: cover; /* Ensures the image fills its container proportionally */
+    border: 3px solid #000; /* Optional: Bold border for brutalist style */
+    box-shadow: 5px 5px 0 #000; /* Optional: Adds depth */
+}
