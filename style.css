@@ -42,7 +42,7 @@ nav {
     background-color: #ffcc00; /* Vibrant yellow for attention */
     text-align: center;
     padding: 15px 0;
-    border-bottom: 5px solid #000;
+    border-bottom: 10px solid #000;
     box-shadow: 0 5px 0 #000; /* Adds depth */
 }
 
