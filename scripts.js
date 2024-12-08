@@ -45,6 +45,7 @@ function parseMarkdownWithMetadata(mdContent) {
 
 // Function to load all blog posts dynamically
 async function loadBlogPosts() {
+    clearContent(); // Clear previous content
     const contentDiv = document.getElementById('content');
     if (!contentDiv) {
         console.error(`Container with ID "content" not found`);
@@ -82,6 +83,14 @@ async function loadBlogPosts() {
     }
 }
 
+// Function to clear the main content container
+function clearContent() {
+    const contentDiv = document.getElementById('content');
+    if (contentDiv) {
+        contentDiv.innerHTML = ''; // Clear existing content
+    }
+}
+
 // Function to ensure a container exists or create it dynamically
 function ensureContainerExists(containerId) {
     let container = document.getElementById(containerId);
@@ -103,6 +112,13 @@ async function loadContentIntoBox(mdFile, boxId) {
 
 // Function to load all sections for the homepage
 async function loadHomepageSections() {
+    clearContent(); // Clear previous content
+    const contentDiv = document.getElementById('content');
+    if (!contentDiv) {
+        console.error(`Container with ID "content" not found`);
+        return;
+    }
+
     const sections = [
         { file: 'pages/home.md', boxId: 'home-box' },
         { file: 'pages/about.md', boxId: 'about-box' },
@@ -110,10 +126,12 @@ async function loadHomepageSections() {
         { file: 'pages/contact.md', boxId: 'contact-box' },
     ];
 
-    // Load all sections in parallel
-    await Promise.all(
-        sections.map(({ file, boxId }) => loadContentIntoBox(file, boxId))
-    );
+    // Ensure all containers exist and load their content
+    sections.forEach(({ file, boxId }) => {
+        const container = ensureContainerExists(boxId);
+        contentDiv.appendChild(container); // Add section containers to the main content
+        loadContentIntoBox(file, boxId); // Load content into the container
+    });
 }
 
 // Function to scroll smoothly to a section
