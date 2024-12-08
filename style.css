@@ -20,21 +20,6 @@ header {
     border-bottom: 8px solid #000; /* unapologetic bold divider */
 }
 
-header h1 {
-    margin: 0;
-    font-size: 4em;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px #000; /* aggressive shadow for impact */
-}
-
-header p {
-    font-size: 1.5em;
-    margin: 10px 0 0;
-    font-style: italic;
-    text-shadow: 1px 1px #000;
-}
-
 /* Navigation Bar */
 nav {
     grid-row: 2; /* Place navbar in the second row */
@@ -44,45 +29,30 @@ nav {
     border-bottom: 5px solid #000;
 }
 
-nav a {
-    margin: 0 20px;
-    text-decoration: none;
-    color: #000; /* black text for contrast */
-    font-size: 1.5em;
-    font-weight: bold;
-    padding: 10px 15px;
-    background-color: #fff; /* white background for links */
-    border: 3px solid #000;
-    transition: all 0.2s ease-in-out;
-}
-
-nav a:hover {
-    color: #fff; /* invert hover state */
-    background-color: #000;
-    border-color: #ff0000; /* red border on hover */
-    text-shadow: 1px 1px #ff0000;
-}
-
 /* Main Content */
 main {
     grid-row: 3; /* Place main content in the third row */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible grid */
+    grid-auto-rows: min-content; /* Row height adapts to content */
+    grid-auto-columns: min-content; /* Column width adapts to content */
     gap: 20px;
     padding: 20px;
     background-color: #f5f5f5; /* subtle light gray for separation */
     border-top: 8px solid #000;
     overflow-y: auto; /* Scroll if content overflows */
+    justify-content: center; /* Center content horizontally */
+    align-items: start; /* Align items to the top */
 }
 
 /* Blog Post Layout */
 article {
     background-color: #fefefe; /* near white for stark contrast */
-    margin: 40px auto;
+    margin: 0 auto;
     padding: 30px;
     border: 8px solid #000; /* strong borders for brutalist style */
-    max-width: 900px;
+    border-radius: 0; /* no rounded corners for a raw look */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* hard shadow for depth */
+    max-width: 100%; /* Allow full width for content */
 }
 
 article h2 {
@@ -115,12 +85,12 @@ article .meta span {
 /* Content Boxes */
 .content-box {
     background-color: #fff;
-    margin: 50px auto;
-    padding: 30px;
+    margin: 0 auto;
+    padding: 20px;
     border: 8px solid #000;
-    max-width: 900px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     text-align: left;
+    max-width: 100%; /* Allow full width for dynamic content */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
