@@ -1,122 +1,147 @@
-/* General styles */
+/* General Styles */
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #f8f8f8;
-    color: #222;
+    background-color: #fff; /* stark white background for contrast */
+    color: #000; /* black text for maximum readability */
     margin: 0;
     padding: 0;
 }
 
-/* Header styles */
+/* Header */
 header {
-    background-color: #ff4136;
-    color: #fff;
+    background-color: #ff0000; /* eye-popping red */
+    color: #fff; /* stark white text */
     text-align: center;
-    padding: 30px 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 40px 20px;
+    border-bottom: 8px solid #000; /* unapologetic bold divider */
 }
 
 header h1 {
     margin: 0;
-    font-size: 3em;
+    font-size: 4em;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px #000; /* aggressive shadow for impact */
 }
 
 header p {
-    font-size: 1.2em;
+    font-size: 1.5em;
     margin: 10px 0 0;
+    font-style: italic;
+    text-shadow: 1px 1px #000;
 }
 
-/* Navigation bar */
+/* Navigation Bar */
 nav {
-    background-color: #2ecc40;
+    background-color: #00ff00; /* neon green */
     text-align: center;
-    padding: 10px 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 15px 0;
+    border-bottom: 5px solid #000;
 }
 
 nav a {
-    margin: 0 15px;
+    margin: 0 20px;
     text-decoration: none;
-    color: #fff;
-    font-size: 1.2em;
+    color: #000; /* black text for contrast */
+    font-size: 1.5em;
     font-weight: bold;
+    padding: 10px 15px;
+    background-color: #fff; /* white background for links */
+    border: 3px solid #000;
+    transition: all 0.2s ease-in-out;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    color: #fff; /* invert hover state */
+    background-color: #000;
+    border-color: #ff0000; /* red border on hover */
+    text-shadow: 1px 1px #ff0000;
 }
 
-/* Main content area */
+/* Main Content */
 main {
-    padding: 40px 20px;
-    background-color: #f8f8f8;
+    padding: 50px 20px;
+    background-color: #f5f5f5; /* subtle light gray for separation */
+    border-top: 8px solid #000;
 }
 
-/* Blog posts layout */
+/* Blog Post Layout */
 article {
-    background-color: #fff;
-    margin: 30px auto;
-    padding: 20px;
-    border: 5px solid #ff4136; /* Bold border for brutalist style */
-    border-radius: 8px; /* Slightly rounded corners for a modern touch */
-    max-width: 800px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background-color: #fefefe; /* near white for stark contrast */
+    margin: 40px auto;
+    padding: 30px;
+    border: 8px solid #000; /* strong borders for brutalist style */
+    border-radius: 0; /* no rounded corners for a raw look */
+    max-width: 900px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* hard shadow for depth */
 }
 
 article h2 {
-    font-size: 1.8em;
-    color: #ff4136;
+    font-size: 2em;
+    color: #000;
     margin-bottom: 10px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px #ff0000; /* bold red shadow */
 }
 
 article p {
-    line-height: 1.8;
-    font-size: 1.2em;
+    line-height: 2;
+    font-size: 1.3em;
     color: #333;
 }
 
 article .meta {
-    font-size: 0.9em;
-    color: #555;
+    font-size: 1em;
+    color: #000;
     margin-bottom: 20px;
-    border-bottom: 2px solid #ff851b;
+    border-bottom: 3px dashed #000;
     padding-bottom: 5px;
 }
 
 article .meta span {
     display: inline-block;
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
 /* Content Boxes */
 .content-box {
     background-color: #fff;
-    margin: 30px auto;
-    padding: 20px;
-    border: 3px solid #ff851b;
-    border-radius: 8px;
-    max-width: 800px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    padding: 30px;
+    border: 8px solid #000;
+    max-width: 900px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
 }
 
 .content-box h2 {
     margin-top: 0;
-    font-size: 1.8em;
-    color: #ff4136;
+    font-size: 2em;
+    color: #000;
+    text-transform: uppercase;
 }
 
 .content-box p {
     font-size: 1.2em;
-    line-height: 1.8;
+    line-height: 2;
+    color: #111;
 }
 
 /* Footer */
 footer {
-    background-color: #0074d9;
+    background-color: #000; /* black footer for maximum contrast */
     color: #fff;
     text-align: center;
-    padding: 10px;
-    margin-top: 20px;
-    font-size: 1em;
+    padding: 20px;
+    margin-top: 30px;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-top: 8px solid #ff0000;
 }
