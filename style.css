@@ -41,7 +41,7 @@ nav {
     grid-row: 2; /* Place navbar in the second row */
     background-color: #ffcc00; /* Vibrant yellow for attention */
     text-align: center;
-    padding: 15px 10px;
+    padding: 15px 10px 20px; /* Added bottom padding */
     border-bottom: 10px solid #000;
     box-shadow: 0 5px 0 #000; /* Adds depth */
 }
