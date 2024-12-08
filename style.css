@@ -6,18 +6,19 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Courier New', Courier, monospace; /* Brutalist aesthetic */
-    background-color: #fff; /* stark white background for contrast */
-    color: #000; /* black text for maximum readability */
+    background-color: #d9ffcc; /* Soft neon green for modern contrast */
+    color: #000; /* Black text for readability */
 }
 
 /* Header */
 header {
     grid-row: 1; /* Place header in the first row */
-    background-color: #ff0000; /* eye-popping red */
-    color: #fff; /* stark white text */
+    background-color: #ff6666; /* Bright red for attention */
+    color: #fff; /* White text for contrast */
     text-align: center;
     padding: 40px 20px;
-    border-bottom: 8px solid #000; /* unapologetic bold divider */
+    border-bottom: 8px solid #000; /* Bold divider */
+    box-shadow: 0 5px 0 #000; /* Hard shadow for a playful "cutout" look */
 }
 
 header h1 {
@@ -25,7 +26,7 @@ header h1 {
     font-size: 4em;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 2px 2px #000; /* aggressive shadow for impact */
+    text-shadow: 2px 2px #000; /* Strong shadow for boldness */
 }
 
 header p {
@@ -38,54 +39,57 @@ header p {
 /* Navigation Bar */
 nav {
     grid-row: 2; /* Place navbar in the second row */
-    background-color: #00ff00; /* neon green */
+    background-color: #ffcc00; /* Vibrant yellow for attention */
     text-align: center;
     padding: 15px 0;
     border-bottom: 5px solid #000;
+    box-shadow: 0 5px 0 #000; /* Adds depth */
 }
 
 nav a {
     margin: 0 20px;
     text-decoration: none;
-    color: #000; /* black text for contrast */
+    color: #000; /* Black text for contrast */
     font-size: 1.5em;
     font-weight: bold;
     padding: 10px 15px;
-    background-color: #fff; /* white background for links */
+    background-color: #fff; /* White background for links */
     border: 3px solid #000;
     transition: all 0.2s ease-in-out;
+    box-shadow: 2px 2px #000; /* Shadow for a "button-like" effect */
 }
 
 nav a:hover {
-    color: #fff; /* invert hover state */
+    color: #fff; /* Invert hover state */
     background-color: #000;
-    border-color: #ff0000; /* red border on hover */
-    text-shadow: 1px 1px #ff0000;
+    border-color: #ff6666; /* Match header color */
+    text-shadow: 1px 1px #ffcc00;
 }
 
 /* Main Content */
 main {
     grid-row: 3; /* Place main content in the third row */
     display: grid;
-    grid-auto-rows: min-content; /* Row height adapts to content */
+    grid-auto-rows: min-content; /* Rows adjust to content */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible grid */
     gap: 20px;
     padding: 20px;
-    background-color: #f5f5f5; /* subtle light gray for separation */
+    background-color: #d9ffcc; /* Soft neon green */
     border-top: 8px solid #000;
-    overflow-y: auto; /* Scroll if content overflows */
+    overflow-y: auto; /* Enable scrolling */
     justify-content: center; /* Center content horizontally */
     align-items: start; /* Align items to the top */
 }
 
 /* Blog Post Layout */
 article {
-    background-color: #fefefe; /* near white for stark contrast */
+    background-color: #fff; /* White for high contrast */
     margin: 0 auto;
     padding: 30px;
-    border: 8px solid #000; /* strong borders for brutalist style */
-    max-width: 100%; /* Allow full width for content */
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* hard shadow for depth */
+    border: 8px solid #000; /* Bold black border */
+    max-width: 100%; /* Full width for content */
+    box-shadow: 5px 5px 0 #000; /* Hard shadow for cutout effect */
+    transform: rotate(-1deg); /* Subtle tilt for playfulness */
 }
 
 article h2 {
@@ -93,7 +97,7 @@ article h2 {
     color: #000;
     margin-bottom: 10px;
     text-transform: uppercase;
-    text-shadow: 2px 2px #ff0000; /* bold red shadow */
+    text-shadow: 2px 2px #ff6666; /* Bold red shadow */
 }
 
 article p {
@@ -106,7 +110,7 @@ article .meta {
     font-size: 1em;
     color: #000;
     margin-bottom: 20px;
-    border-bottom: 3px dashed #000;
+    border-bottom: 3px dashed #000; /* Neo-brutalist dashed line */
     padding-bottom: 5px;
 }
 
@@ -117,19 +121,19 @@ article .meta span {
 
 /* Content Boxes */
 .content-box {
-    background-color: #fff;
+    background-color: #ffff66; /* Bright yellow for vibrancy */
     margin: 0 auto;
     padding: 20px;
     border: 8px solid #000;
-    max-width: 100%; /* Allow full width for dynamic content */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    max-width: 100%; /* Full width for dynamic content */
+    box-shadow: 5px 5px 0 #000; /* Hard shadow for brutalist effect */
     text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .content-box:hover {
-    transform: scale(1.02);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
+    transform: scale(1.05) rotate(-2deg); /* Slight rotation for interactivity */
+    box-shadow: 8px 8px 0 #000;
 }
 
 .content-box h2 {
@@ -148,12 +152,13 @@ article .meta span {
 /* Footer */
 footer {
     grid-row: 4; /* Place footer in the fourth row */
-    background-color: #000; /* black footer for maximum contrast */
-    color: #fff;
+    background-color: #000; /* Black for high contrast */
+    color: #fff; /* White text */
     text-align: center;
     padding: 20px;
     font-size: 1.2em;
     letter-spacing: 1px;
     text-transform: uppercase;
-    border-top: 8px solid #ff0000;
+    border-top: 8px solid #ff6666;
+    box-shadow: 0 -5px 0 #000; /* Adds a "raised" look */
 }
