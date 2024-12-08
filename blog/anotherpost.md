@@ -1,7 +1,13 @@
-title: Another Blog Post
-subtitle: Exploring New Horizons
+title: Second Blog Post
+subtitle: More about the blog
 date: 2024-12-02
+hero-image: /img/img.png
+status: published
+featured: true
+blogroll: true
 
-# Another Blog Post
+This is the excerpt of the blog post. It provides a short overview.
 
-This post dives into new tools and techniques for redefining the digital experience.
+---
+
+This is the full content of the blog post. It includes more details and images.
