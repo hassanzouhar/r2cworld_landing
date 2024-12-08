@@ -9,7 +9,6 @@ body {
     background-color: #d9ffcc;
     color: #000;
 }
-
 /* Header */
 header {
     grid-row: 1;
@@ -20,7 +19,6 @@ header {
     border-bottom: 8px solid #000;
     box-shadow: 0 15px 0 #000;
 }
-
 header h1 {
     margin: 0;
     font-size: 4em;
@@ -88,9 +86,47 @@ main {
     align-items: start; /* Align items to the top */
 }
 
-/* Page Content Box */
-.content-box-page {
-    background-color: #ffffcc; /* Light yellow for pages */
+/* Blog Post Layout */
+article {
+    background-color: #fff; /* White for high contrast */
+    margin: 0 auto;
+    padding: 30px;
+    border: 8px solid #000; /* Bold black border */
+    max-width: 100%; /* Full width for content */
+    box-shadow: 5px 5px 0 #000; /* Hard shadow for cutout effect */
+    transform: rotate(-1deg); /* Subtle tilt for playfulness */
+}
+
+article h2 {
+    font-size: 2em;
+    color: #000;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px #ff6666; /* Bold red shadow */
+}
+
+article p {
+    line-height: 2;
+    font-size: 1.3em;
+    color: #333;
+}
+
+article .meta {
+    font-size: 1em;
+    color: #000;
+    margin-bottom: 20px;
+    border-bottom: 3px dashed #000; /* Neo-brutalist dashed line */
+    padding-bottom: 5px;
+}
+
+article .meta span {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+/* Content Boxes */
+.content-box {
+    background-color: #ffff66; /* Bright yellow for vibrancy */
     margin: 0 auto;
     padding: 20px;
     border: 8px solid #000;
@@ -100,49 +136,19 @@ main {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.content-box-page:hover {
+.content-box:hover {
     transform: scale(1.05) rotate(-2deg); /* Slight rotation for interactivity */
     box-shadow: 8px 8px 0 #000;
 }
 
-.content-box-page h2 {
+.content-box h2 {
     margin-top: 0;
     font-size: 2em;
     color: #000;
     text-transform: uppercase;
 }
 
-.content-box-page p {
-    font-size: 1.2em;
-    line-height: 2;
-    color: #111;
-}
-
-/* Blog Content Box */
-.content-box-blog {
-    background-color: #ffff66; /* Bright yellow for blogs */
-    margin: 0 auto;
-    padding: 20px;
-    border: 8px solid #000;
-    max-width: 100%; /* Full width for dynamic content */
-    box-shadow: 5px 5px 0 #000; /* Hard shadow for brutalist effect */
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.content-box-blog:hover {
-    transform: scale(1.05) rotate(-1deg); /* Slight rotation for interactivity */
-    box-shadow: 8px 8px 0 #000;
-}
-
-.content-box-blog h2 {
-    margin-top: 0;
-    font-size: 2em;
-    color: #000;
-    text-transform: uppercase;
-}
-
-.content-box-blog p {
+.content-box p {
     font-size: 1.2em;
     line-height: 2;
     color: #111;
@@ -150,7 +156,7 @@ main {
 
 /* Footer */
 footer {
-    grid-row: 4;
+    grid-row: 4; /* Place footer in the fourth row */
     background-color: #000; /* Black for high contrast */
     color: #fff; /* White text */
     text-align: center;
@@ -160,6 +166,108 @@ footer {
     text-transform: uppercase;
     border-top: 8px solid #ff6666;
     box-shadow: 0 -5px 0 #000; /* Adds a "raised" look */
+}
+/* "READ MORE" Button */
+.read-more {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff; /* White text */
+    background-color: #ff6666; /* Bright red background */
+    text-decoration: none; /* Remove underline */
+    border: 3px solid #000; /* Bold black border */
+    box-shadow: 4px 4px 0 #000; /* Brutalist shadow */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.read-more:hover {
+    background-color: #000; /* Invert colors on hover */
+    color: #ffcc00; /* Vibrant yellow text */
+    box-shadow: 6px 6px 0 #000; /* Increase shadow size */
+    transform: translate(-2px, -2px); /* Slight movement effect */
+}
+.read-more, .back-to-blog {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff6666;
+    text-decoration: none;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.read-more:hover, .back-to-blog:hover {
+    background-color: #000;
+    color: #ffcc00;
+    box-shadow: 6px 6px 0 #000;
+    transform: translate(-2px, -2px);
+}
+.hero-image {
+    object-fit: contain; /* Ensures the entire image is visible */
+    max-height: 400px; /* Example: Limit height for larger screens */
+}
+/* Main Content */
+main {
+    grid-row: 3;
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #d9ffcc;
+    border-top: 8px solid #000;
+    overflow-y: auto;
+}
+
+/* Content Box */
+.content-box {
+    background-color: #ffff66;
+    margin: 0 auto;
+    padding: 20px;
+    border: 8px solid #000;
+    max-width: 100%;
+    box-shadow: 5px 5px 0 #000;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-box:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 8px 8px 0 #000;
+}
+
+.content-box h2 {
+    margin-top: 0;
+    font-size: 2em;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.content-box p {
+    font-size: 1.2em;
+    line-height: 2;
+    color: #111;
+}
+
+/* Footer */
+footer {
+    grid-row: 4;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-top: 8px solid #ff6666;
+    box-shadow: 0 -5px 0 #000;
 }
 
 /* Hero Image */
