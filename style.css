@@ -85,3 +85,44 @@ footer {
     font-size: 1em;
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
 }
+
+/* Blog posts layout */
+article {
+    background-color: #fff;
+    margin: 30px auto;
+    padding: 20px;
+    border: 5px solid #ff4136; /* Bold border for brutalist style */
+    border-radius: 8px; /* Slightly rounded corners for a modern touch */
+    max-width: 800px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+article h2 {
+    font-size: 1.8em;
+    color: #ff4136;
+    margin-bottom: 10px;
+}
+
+article p {
+    line-height: 1.8;
+    font-size: 1.2em;
+    color: #333;
+}
+
+article .meta {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ff851b;
+    padding-bottom: 5px;
+}
+
+article .meta span {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+main {
+    padding: 40px 20px;
+    background-color: #f8f8f8;
+}
