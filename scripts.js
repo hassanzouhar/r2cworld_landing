@@ -24,6 +24,7 @@ function parseMarkdownWithMetadata(mdContent, full = false) {
         else if (line.startsWith('date:')) metadata.date = line.replace('date:', '').trim();
         else if (line.startsWith('hero-image:')) metadata.heroImage = line.replace('hero-image:', '').trim();
         else if (line.startsWith('status:')) metadata.status = line.replace('status:', '').trim();
+        else if (line.startsWith('featured:')) metadata.featured = line.replace('featured:', '').trim();
         else if (line.startsWith('blogroll:')) metadata.blogroll = line.replace('blogroll:', '').trim();
         else if (line === '---') isExcerpt = false;
         else if (isExcerpt || full) content += `${line}\n`;
