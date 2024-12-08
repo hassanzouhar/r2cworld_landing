@@ -62,3 +62,36 @@ function parseMarkdownWithMetadata(mdContent) {
 
     return { html: marked.parse(html), metadata };
 }
+
+// Function to load content into specific boxes
+async function loadContentIntoBox(mdFile, boxId) {
+    const box = document.getElementById(boxId);
+    try {
+        const response = await fetch(mdFile);
+        if (!response.ok) throw new Error(`Failed to fetch ${mdFile}`);
+        const mdContent = await response.text();
+        box.innerHTML = marked.parse(mdContent);
+    } catch (error) {
+        box.innerHTML = `<p>Error loading content from ${mdFile}. Please try again later.</p>`;
+        console.error(error);
+    }
+}
+
+// Function to load all sections
+function loadHomepageSections() {
+    loadContentIntoBox('pages/home.md', 'home-box');
+    loadContentIntoBox('pages/about.md', 'about-box');
+    loadContentIntoBox('pages/projects.md', 'projects-box');
+    loadContentIntoBox('pages/contact.md', 'contact-box');
+}
+
+// Function to scroll to a section
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Load all sections on page load
+window.onload = loadHomepageSections;
