@@ -16,7 +16,7 @@ header {
     background-color: #ff6666; /* Bright red for attention */
     color: #fff; /* White text for contrast */
     text-align: center;
-    padding: 40px 20px;
+    padding: 30px 10px;
     border-bottom: 8px solid #000; /* Bold divider */
     box-shadow: 0 5px 0 #000; /* Hard shadow for a playful "cutout" look */
 }
