@@ -6,7 +6,7 @@ status: published
 featured: true
 blogroll: true
 
-More will follow soon.
+More will follow soon..
 
 ---
 
