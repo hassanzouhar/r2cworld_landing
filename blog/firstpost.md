@@ -1,13 +1,13 @@
-title: First Blog Post
+title: Evolution in Progress...
 subtitle: Welcome to the blog
-date: 2024-12-01
+date: Published 2024-12-09
 hero-image: /img/img.png
 status: published
 featured: true
 blogroll: true
 
-This is the excerpt of the blog post. It provides a short overview.
+More will follow soon.
 
 ---
 
-This is the full content of the blog post. It includes more details and images.
+Made with <3 by Restless Rebels Collective...

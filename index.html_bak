@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0 20px; /* Add padding to the sides */
+            background-color: #fefefe;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #ff6666;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            box-shadow: 0 8px 0 #000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Main Content */
+        main {
+            margin: 10px auto;
+            padding: 10px;
+            background-color: #fff;
+            width: 100%; /* Ensure it takes the full width of the container */
+            box-sizing: border-box; /* Include padding in the element's width calculation */
+        }
+
+        main img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px 0;
+        }
+
+        main h1 {
+            font-size: 2em;
+            color: #ff6666;
+        }
+
+        main .meta {
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        main .content {
+            line-height: 1.8;
+            font-size: 1.2em;
+            color: #111;
+        }
+
+        /* Blog Post Layout */
+        article {
+            background-color: #fff; /* High contrast white background */
+            margin: 20px auto; /* Add vertical spacing */
+            padding: 40px; /* Generous padding for better readability */
+            border: 8px solid #000; /* Bold black border for brutalist style */
+            max-width: 800px; /* Restrict width for better readability */
+            box-shadow: 10px 10px 0 #000; /* Dramatic shadow for brutalist effect */
+            transform: rotate(-0.5deg); /* Slight tilt for playful brutalist style */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth interactivity */
+        }
+
+        article:hover {
+            transform: rotate(0); /* Straighten on hover */
+            box-shadow: 12px 12px 0 #000; /* Enhance shadow effect */
+        }
+
+        /* Headings in Blog Posts */
+        article h1, article h2 {
+            font-size: 2.5em; /* Large for emphasis */
+            color: #000; /* Black for boldness */
+            margin-bottom: 20px; /* Space after heading */
+            text-transform: uppercase; /* Bold text transformation */
+            text-shadow: 3px 3px #ff6666; /* Brutalist shadow in red */
+        }
+
+        article h1 {
+            font-size: 3em; /* Even larger for main headings */
+            margin-bottom: 30px; /* Additional spacing */
+        }
+
+        /* Paragraphs in Blog Posts */
+        article p {
+            line-height: 1.8; /* Enhance readability */
+            font-size: 1.3em; /* Slightly larger font for content */
+            color: #333; /* Neutral text color for readability */
+            margin-bottom: 20px; /* Space between paragraphs */
+        }
+
+        /* Metadata Section */
+        article .meta {
+            font-size: 1em; /* Small but readable */
+            color: #666; /* Subtle gray color */
+            margin-bottom: 30px; /* Space below metadata */
+            border-bottom: 3px dashed #000; /* Brutalist dashed line */
+            padding-bottom: 10px; /* Spacing inside the metadata area */
+            text-align: left; /* Align metadata to the left */
+        }
+
+        article .meta span {
+            display: inline-block;
+            margin-right: 15px; /* Space between metadata items */
+            font-weight: bold; /* Highlight metadata */
+        }
+
+        /* Images in Blog Posts */
+        article img {
+            display: block; /* Center image */
+            margin: 20px auto; /* Space around image */
+            max-width: 100%; /* Ensure it doesn’t overflow */
+            border: 8px solid #000; /* Bold border for focus */
+            box-shadow: 5px 5px 0 #000; /* Brutalist shadow */
+        }
+
+        /* Buttons in Blog Posts */
+        article a.button {
+            display: inline-block;
+            margin-top: 30px; /* Add space before button */
+            padding: 15px 30px; /* Larger button size */
+            font-size: 1.2em; /* Readable text size */
+            font-weight: bold; /* Make the button text bold */
+            color: #fff; /* White text */
+            background-color: #ff6666; /* Bright red background */
+            text-decoration: none; /* Remove underline */
+            border: 4px solid #000; /* Bold black border */
+            box-shadow: 6px 6px 0 #000; /* Strong brutalist shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        article a.button:hover {
+            transform: translate(-3px, -3px); /* Movement on hover */
+            box-shadow: 9px 9px 0 #000; /* Enhance shadow on hover */
+            background-color: #000; /* Change background color */
+            color: #ffcc00; /* Bright yellow text */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>R2C/world</h1>
+    </header>
+    <main id="content">
+        <h1>Loading...</h1>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Function to fetch and render a single blog post
+        async function loadBlogPost(mdFile) {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '<h1>Loading...</h1>';
+
+            try {
+                const response = await fetch(mdFile);
+                if (!response.ok) throw new Error(`Failed to fetch ${mdFile}: ${response.statusText}`);
+                const mdContent = await response.text();
+
+                const { metadata, html } = parseMarkdownWithMetadata(mdContent);
+
+                contentDiv.innerHTML = `
+                    <article>
+                        <h1>${metadata.title || 'Untitled'}</h1>
+                        <div class="meta">${metadata.date || 'Unknown Date'}</div>
+                        ${metadata.heroImage ? `<img src="${metadata.heroImage}" alt="${metadata.title}">` : ''}
+                        <div class="content">${html}</div>
+                    </article>
+                `;
+            } catch (error) {
+                contentDiv.innerHTML = '<h1>Error loading post.</h1>';
+                console.error(error);
+            }
+        }
+
+       // Function to parse Markdown with metadata
+function parseMarkdownWithMetadata(mdContent) {
+    const metadata = {};
+    const mdLines = mdContent.split('\n');
+    let content = '';
+
+    for (const line of mdLines) {
+        if (line.startsWith('title:')) {
+            metadata.title = line.replace('title:', '').trim();
+        } else if (line.startsWith('date:')) {
+            metadata.date = line.replace('date:', '').trim();
+        } else if (line.startsWith('hero-image:')) {
+            metadata.heroImage = line.replace('hero-image:', '').trim();
+        } else if (
+            !line.startsWith('subtitle:') &&
+            !line.startsWith('status:') &&
+            !line.startsWith('blogroll:') &&
+            !line.startsWith('excerpt:') &&
+            !line.startsWith('featured:')
+        ) {
+            content += `${line}\n`;
+        }
+    }
+
+    return { metadata, html: marked.parse(content) };
+}
+
+        // Function to navigate back to the blog list
+        function goBackToBlog() {
+            window.location.href = 'index.html'; // Adjust as needed
+        }
+
+        // Load the post dynamically
+        const urlParams = new URLSearchParams(window.location.search);
+        const postFile = urlParams.get('post') || 'blog/firstpost.md'; // Default file
+        loadBlogPost(postFile);
+    </script>
+</body>
+</html>

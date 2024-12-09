@@ -24,36 +24,28 @@ function parseMarkdownWithMetadata(mdContent, full = false) {
         else if (line.startsWith('date:')) metadata.date = line.replace('date:', '').trim();
         else if (line.startsWith('hero-image:')) metadata.heroImage = line.replace('hero-image:', '').trim();
         else if (line.startsWith('status:')) metadata.status = line.replace('status:', '').trim();
-        else if (line.startsWith('featured:')) metadata.featured = line.replace('featured:', '').trim();
         else if (line.startsWith('blogroll:')) metadata.blogroll = line.replace('blogroll:', '').trim();
         else if (line === '---') isExcerpt = false;
         else if (isExcerpt || full) content += `${line}\n`;
     }
 
-    return { metadata, html: marked.parse(content) };
+    try {
+        return { metadata, html: marked.parse(content) };
+    } catch (error) {
+        console.error(`Error parsing Markdown content: ${error}`);
+        return { metadata, html: '<p>Error rendering content.</p>' };
+    }
 }
 
 // Function to load homepage content (pages + blog posts)
 async function loadHomepage() {
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = ''; // Clear previous content
+    contentDiv.innerHTML = '<p>Loading content...</p>'; // Temporary loading message
 
-    const pageFiles = ['pages/home.md', 'pages/about.md', 'pages/projects.md', 'pages/contact.md'];
     const blogFiles = ['blog/firstpost.md', 'blog/anotherpost.md'];
+    const pageFiles = ['pages/home.md', 'pages/about.md', 'pages/projects.md', 'pages/contact.md'];
 
-    // Load pages
-    for (const file of pageFiles) {
-        const mdContent = await fetchMarkdown(file);
-        if (mdContent) {
-            const { metadata, html } = parseMarkdownWithMetadata(mdContent);
-            contentDiv.innerHTML += `
-                <div class="content-box">
-                    <h2>${metadata.title || 'Untitled'}</h2>
-                    ${html}
-                </div>
-            `;
-        }
-    }
+    let contentHTML = '';
 
     // Load blog posts
     for (const file of blogFiles) {
@@ -61,8 +53,8 @@ async function loadHomepage() {
         if (mdContent) {
             const { metadata, html } = parseMarkdownWithMetadata(mdContent);
             if (metadata.status === 'published' && metadata.blogroll === 'true') {
-                contentDiv.innerHTML += `
-                    <div class="content-box">
+                contentHTML += `
+                    <div class="content-box-blog">
                         <h2>${metadata.title || 'Untitled'}</h2>
                         <p>${metadata.subtitle || ''}</p>
                         <p>${metadata.date || ''}</p>
@@ -73,22 +65,40 @@ async function loadHomepage() {
             }
         }
     }
+
+    // Load pages
+    for (const file of pageFiles) {
+        const mdContent = await fetchMarkdown(file);
+        if (mdContent) {
+            const { metadata, html } = parseMarkdownWithMetadata(mdContent);
+            contentHTML += `
+                <div class="content-box-page">
+                    <h2>${metadata.title || 'Untitled'}</h2>
+                    ${html}
+                </div>
+            `;
+        }
+    }
+
+    contentDiv.innerHTML = contentHTML || '<p>No content available at this time.</p>';
 }
 
 // Function to load blog page (blog posts only)
 async function loadBlogPage() {
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = ''; // Clear previous content
+    contentDiv.innerHTML = '<p>Loading blog posts...</p>'; // Temporary loading message
 
     const blogFiles = ['blog/firstpost.md', 'blog/anotherpost.md'];
+
+    let contentHTML = '';
 
     for (const file of blogFiles) {
         const mdContent = await fetchMarkdown(file);
         if (mdContent) {
             const { metadata, html } = parseMarkdownWithMetadata(mdContent);
             if (metadata.status === 'published') {
-                contentDiv.innerHTML += `
-                    <div class="content-box">
+                contentHTML += `
+                    <div class="content-box-blog">
                         <h2>${metadata.title || 'Untitled'}</h2>
                         <p>${metadata.subtitle || ''}</p>
                         <p>${metadata.date || ''}</p>
@@ -99,12 +109,14 @@ async function loadBlogPage() {
             }
         }
     }
+
+    contentDiv.innerHTML = contentHTML || '<p>No blog posts found.</p>';
 }
 
 // Function to load a full blog post
 async function loadFullPost(mdFile) {
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = ''; // Clear previous content
+    contentDiv.innerHTML = '<p>Loading post...</p>'; // Temporary loading message
 
     const mdContent = await fetchMarkdown(mdFile);
     if (mdContent) {
@@ -122,13 +134,5 @@ async function loadFullPost(mdFile) {
     }
 }
 
-// Function to clear the main content container
-function clearContent() {
-    const contentDiv = document.getElementById('content');
-    if (contentDiv) {
-        contentDiv.innerHTML = ''; // Clear existing content
-    }
-}
-
 // Load homepage on page load
-window.onload = loadHomepage;
+window.addEventListener('DOMContentLoaded', loadHomepage);

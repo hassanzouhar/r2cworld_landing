@@ -211,7 +211,7 @@ footer {
 }
 .hero-image {
     object-fit: contain; /* Ensures the entire image is visible */
-    max-height: 400px; /* Example: Limit height for larger screens */
+    max-height: 200px; /* Example: Limit height for larger screens */
 }
 /* Main Content */
 main {
@@ -219,8 +219,8 @@ main {
     display: grid;
     grid-auto-rows: min-content;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    gap: 15px;
+    padding: 10px;
     background-color: #d9ffcc;
     border-top: 8px solid #000;
     overflow-y: auto;
